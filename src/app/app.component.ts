@@ -12,4 +12,3 @@ export class AppComponent {
 }
 
 const unusedVariable = 42;
-var xyz = ;  // komplett kaputt 😅
