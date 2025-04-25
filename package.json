@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "start via Dockerfile",
-    "build": "using Dockerfile",
+    "start": "ng serve --host 0.0.0.0 --port 9000",
+    "build": "ng build --output-path=dist/container-man",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
     "test": "ng test"
