@@ -1,21 +1,22 @@
-# ─── Build-Stage ───
+# ─────────── Build-Stage ───────────
 FROM node:20.19.1-slim AS build
 
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-
-# Force Angular to build into /app/dist
+# Baue die Angular App (Output landet im default dist/<projectName>)
 RUN npm run build -- --output-path=dist
 
-# ─── Serve-Stage mit Nginx ───
-FROM nginx:alpine
-# Erst mal alle Standard-Dateien rausschmeißen
-RUN rm -rf /usr/share/nginx/html/*
+# ──────── Serve-Stage mit 'serve' ────────
+FROM node:20.19.1-slim
 
-# Dann die gebauten Dateien hinein
-COPY --from=build /app/dist/ /usr/share/nginx/html/
+WORKDIR /app
+# Installiere den Static-Server
+RUN npm install -g serve
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Kopiere das gebaute Verzeichnis
+COPY --from=build /app/dist /app/dist
+
+# Railway setzt PORT – verwende ihn:
+ENTRYPOINT ["sh", "-c", "serve -s /app/dist -l $PORT"]
