@@ -19,4 +19,5 @@ RUN npm install -g serve
 COPY --from=build /app/dist /app/dist
 
 # Railway setzt PORT – verwende ihn:
-ENTRYPOINT ["sh", "-c", "serve -s /app/dist -l $PORT"]
+ENTRYPOINT ["sh", "-c", "serve -s /app/dist/browser -l $PORT"]
+
