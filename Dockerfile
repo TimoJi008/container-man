@@ -12,7 +12,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Statische Dateien aus der Build-Stage kopieren
-COPY --from=build /app/dist/container-man /usr/share/nginx/html
+COPY --from=build /app/dist/container-man/ /usr/share/nginx/html/
 
 # (Optional) Custom Nginx‐Config für Client‐Routing:
 COPY nginx.conf /etc/nginx/conf.d/default.conf
