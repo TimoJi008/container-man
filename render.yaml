@@ -1,0 +1,9 @@
+# render.yaml
+services:
+  - type: web
+    name: container-man
+    env: docker # setzt Docker-Umgebung
+    plan: starter # Free-Tier
+    repo: TimoJi008/container-man
+    branch: main
+    dockerfilePath: Dockerfile
